@@ -502,18 +502,6 @@ export const conversionStrengths: { title: string; detail: string }[] = [
 
 export const conversionIssues: Issue[] = [
   {
-    severity: 'CRITICAL',
-    title: 'Proof stats render as “0” across the page',
-    detail:
-      'The “Proof, Not Promises” counters (Reduction in 90-day attrition, Hiring hours saved, Faster manager decisions) and every case-study “Results” figure display 0% / 0+ / 0x. They are animated counter widgets whose markup stores the real target value (for example, a target of 40) but never counts up — so the site’s strongest proof points read as zero, while the true figures (e.g. 20%, 41%, 64%, 50%) sit only inside the case-study prose.',
-    fix: 'Repair the counter trigger and add a static numeric fallback so the real values always display, even if the animation does not fire.',
-    shot: {
-      src: '/screenshots/proof-counters.png',
-      caption:
-        'Live homepage — the “Proof, Not Promises” counters render 0% / 0+ / 0x instead of the real figures.',
-    },
-  },
-  {
     severity: 'DECLINING',
     title: 'The same testimonial is repeated five times',
     detail:
@@ -527,15 +515,10 @@ export const conversionIssues: Issue[] = [
   },
   {
     severity: 'BELOW AVERAGE',
-    title: 'Proof numbers live only in JavaScript, not the HTML',
+    title: 'Proof numbers aren’t in the static HTML (AI & crawlers read 0)',
     detail:
-      'Because the stats are JS-animated counters that start at 0, the real numbers are absent from the initial HTML — so crawlers, AI engines and screen readers see “0”. This compounds the AI-visibility and llms.txt gaps found in the crawl.',
-    fix: 'Render the real proof values as static text in the markup so they are machine-readable and citable.',
-    shot: {
-      src: '/screenshots/case-study-zeros.png',
-      caption:
-        'Live homepage — the case study describes a “20% reduction in turnover” in prose, yet the Results counter renders 0%.',
-    },
+      'The proof and case-study counters do animate from 0 up to their real values (40%, 120+, 5x, etc.) for visitors who scroll, so this is not a human-facing conversion problem. But those values are injected by JavaScript and are absent from the initial HTML — so AI engines, search crawlers and screen readers still read “0”. This compounds the AI-visibility and llms.txt gaps found in the crawl.',
+    fix: 'Also output the real figures as static text (or server-render them) so they are machine-readable and citable even before the JS counters run.',
   },
   {
     severity: 'BELOW AVERAGE',
@@ -560,52 +543,45 @@ export const homepageImprovements: {
 }[] = [
   {
     priority: 'P1',
-    title: 'Fix the zeroed-out proof counters (and add a static fallback)',
-    detail:
-      'Restore the count-up so “Reduction in 90-day attrition”, case-study results and the other metrics show their real values instead of 0. Hard-code the numbers as text so they never render as zero — this is the single biggest credibility leak above and below the fold.',
-    tone: 'bad',
-  },
-  {
-    priority: 'P2',
-    title: 'Make every proof number real HTML text',
-    detail:
-      'Move the stat values out of JS-only counters into the static markup. This lifts on-page trust for human visitors and makes the numbers crawlable and AI-citable — directly addressing the 0-in-DOM and llms.txt findings.',
-    tone: 'warn',
-  },
-  {
-    priority: 'P3',
     title: 'Replace the duplicate testimonials with distinct proof',
     detail:
       'Swap the five identical quotes for varied, fully attributed testimonials with measurable outcomes. Pair each with a company name or logo to make the social proof concrete.',
     tone: 'warn',
   },
   {
-    priority: 'P4',
+    priority: 'P2',
     title: 'Bring trust + a headline metric above the fold',
     detail:
       'Surface the “Trusted by” client logos and one quantified proof stat right next to the hero demo form, so visitors see credibility before they scroll.',
     tone: 'neutral',
   },
   {
-    priority: 'P5',
+    priority: 'P3',
     title: 'Focus the page on one primary CTA',
     detail:
       'Trim the 39-link header and de-emphasise competing CTAs so “Schedule a Demo” is the obvious next step on every screen. Keep the inline 2-step form — it is already low-friction — and place supporting ROI / social proof beside it to lift completion.',
     tone: 'neutral',
   },
   {
-    priority: 'P6',
+    priority: 'P4',
     title: 'Add a short product / platform demo video',
     detail:
       'The nine AI modules are explained in text and bullets only — the platform itself is never shown in motion. The only videos on the page are blog-post features at the very bottom, plus off-page webinar links. A 60–90 second SmartSuite™ walkthrough embedded near the hero or modules lets self-qualifying B2B buyers understand the product faster and converts higher-intent visitors who are not yet ready to book a cold demo.',
     tone: 'neutral',
   },
   {
-    priority: 'P7',
+    priority: 'P5',
     title: 'Turn the blog section into a conversion zone',
     detail:
       'Ten blog posts at the bottom of the homepage send engaged readers off-site with no path back to conversion. Either replace the section with a single featured insight card plus a demo CTA, or append a “Ready to hire smarter? → Schedule a Demo” rail after the blog links to recapture intent before visitors leave.',
     tone: 'warn',
+  },
+  {
+    priority: 'P6',
+    title: 'Render the proof numbers as static HTML for AI & crawlers',
+    detail:
+      'The counters animate correctly for visitors, but their values live only in JavaScript — so AI engines, crawlers and screen readers read 0. Output the real figures as static text (or server-render them) so they are machine-readable and citable, directly addressing the 0-in-DOM and llms.txt findings. (Lower priority — this is an AI/SEO fix, not a human-facing conversion blocker.)',
+    tone: 'neutral',
   },
 ]
 
