@@ -593,13 +593,6 @@ export const homepageImprovements: {
       'Ten blog posts at the bottom of the homepage send engaged readers off-site with no path back to conversion. Either replace the section with a single featured insight card plus a demo CTA, or append a “Ready to hire smarter? → Schedule a Demo” rail after the blog links to recapture intent before visitors leave.',
     tone: 'warn',
   },
-  {
-    priority: 'P9',
-    title: 'Add live chat or an AI chatbot',
-    detail:
-      'For a platform selling AI-powered hiring tools, the absence of a live chat or chatbot widget is a missed signal. A chat widget converts fence-sitters who have questions but are not ready to commit to a full demo booking — capturing leads that otherwise leave silently.',
-    tone: 'neutral',
-  },
 ]
 
 // ---------------------------------------------------------------------------
