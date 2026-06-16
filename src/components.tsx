@@ -106,11 +106,13 @@ export function IssueCard({
   title,
   detail,
   fix,
+  shot,
 }: {
   severity: Severity
   title: string
   detail: string
   fix?: string
+  shot?: { src: string; caption: string }
 }) {
   return (
     <Panel className="border-l-2 border-l-[#EF4444]/40">
@@ -124,6 +126,19 @@ export function IssueCard({
           <span className="font-semibold text-[#4CCD79]">Fix: </span>
           {fix}
         </p>
+      )}
+      {shot && (
+        <figure className="mt-4">
+          <img
+            src={shot.src}
+            alt={shot.caption}
+            loading="lazy"
+            className="w-full rounded-lg border border-white/10 bg-white"
+          />
+          <figcaption className="mt-2 text-xs italic leading-relaxed text-slate-500">
+            {shot.caption}
+          </figcaption>
+        </figure>
       )}
     </Panel>
   )

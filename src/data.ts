@@ -30,6 +30,7 @@ export interface Issue {
   title: string
   detail: string
   fix?: string
+  shot?: { src: string; caption: string }
 }
 
 export const company = {
@@ -506,6 +507,11 @@ export const conversionIssues: Issue[] = [
     detail:
       'The “Proof, Not Promises” counters (Reduction in 90-day attrition, Hiring hours saved, Faster manager decisions) and every case-study “Results” figure display 0% / 0+ / 0x. They are animated counter widgets whose markup stores the real target value (for example, a target of 40) but never counts up — so the site’s strongest proof points read as zero, while the true figures (e.g. 20%, 41%, 64%, 50%) sit only inside the case-study prose.',
     fix: 'Repair the counter trigger and add a static numeric fallback so the real values always display, even if the animation does not fire.',
+    shot: {
+      src: '/screenshots/proof-counters.png',
+      caption:
+        'Live homepage — the “Proof, Not Promises” counters render 0% / 0+ / 0x instead of the real figures.',
+    },
   },
   {
     severity: 'DECLINING',
@@ -513,6 +519,11 @@ export const conversionIssues: Issue[] = [
     detail:
       'The “What Our Customers Say” block shows one identical quote — “Before SmartSource™, we threw job posts everywhere…” attributed to “Director of TA, National Logistics Group” — duplicated five times in a row, which undercuts credibility.',
     fix: 'Replace the duplicates with distinct, attributed testimonials (name, title, company, ideally logo or photo).',
+    shot: {
+      src: '/screenshots/testimonials-duplicate.png',
+      caption:
+        'Live homepage — every slide of the testimonial carousel carries the identical quote (carousel unrolled here to show all five).',
+    },
   },
   {
     severity: 'BELOW AVERAGE',
@@ -520,6 +531,11 @@ export const conversionIssues: Issue[] = [
     detail:
       'Because the stats are JS-animated counters that start at 0, the real numbers are absent from the initial HTML — so crawlers, AI engines and screen readers see “0”. This compounds the AI-visibility and llms.txt gaps found in the crawl.',
     fix: 'Render the real proof values as static text in the markup so they are machine-readable and citable.',
+    shot: {
+      src: '/screenshots/case-study-zeros.png',
+      caption:
+        'Live homepage — the case study describes a “20% reduction in turnover” in prose, yet the Results counter renders 0%.',
+    },
   },
   {
     severity: 'BELOW AVERAGE',
@@ -527,6 +543,11 @@ export const conversionIssues: Issue[] = [
     detail:
       'The header carries 39 links and the page stacks several secondary CTAs (Watch Webinar, Watch Now, Calculate Your Savings, plus 9 “Learn More” module links), diluting attention on the one high-intent action — “Schedule a Demo.”',
     fix: 'Streamline the navigation and foreground a single primary CTA throughout the page.',
+    shot: {
+      src: '/screenshots/crowded-nav.png',
+      caption:
+        'Live homepage — the SmartSuite™ menu alone opens a 17-item mega-menu; the header carries 39 links in total.',
+    },
   },
 ]
 
