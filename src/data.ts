@@ -519,6 +519,11 @@ export const conversionIssues: Issue[] = [
     detail:
       'The proof and case-study counters do animate from 0 up to their real values (40%, 120+, 5x, etc.) for visitors who scroll, so this is not a human-facing conversion problem. But those values are injected by JavaScript and are absent from the initial HTML — so AI engines, search crawlers and screen readers still read “0”. This compounds the AI-visibility and llms.txt gaps found in the crawl.',
     fix: 'Also output the real figures as static text (or server-render them) so they are machine-readable and citable even before the JS counters run.',
+    shot: {
+      src: '/screenshots/proof-counters.png',
+      caption:
+        'The initial HTML, before the JS counters run — the proof stats output 0% / 0+ / 0x. Visitors who scroll see the real animated values, but AI engines, crawlers and screen-readers receive exactly these zeros.',
+    },
   },
   {
     severity: 'BELOW AVERAGE',

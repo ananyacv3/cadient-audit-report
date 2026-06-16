@@ -47,7 +47,7 @@ with sync_playwright() as p:
     page.evaluate(HIDE_WIDGETS)
     time.sleep(2.0)
 
-    def element_shot(name, mark_js):
+    def element_shot(name, mark_js, freeze0=False):
         page.evaluate(CLEAR)
         page.evaluate(HIDE_WIDGETS)
         info = page.evaluate(mark_js)
@@ -56,6 +56,11 @@ with sync_playwright() as p:
         loc.scroll_into_view_if_needed()
         page.wait_for_timeout(400)
         page.evaluate(HIDE_WIDGETS)
+        if freeze0:
+            # represent the initial-HTML / pre-JS state that crawlers & AI receive
+            page.evaluate("""() => { document.querySelectorAll('[data-shot] .elementor-counter-number')
+                .forEach(c=>{ c.textContent='0'; }); }""")
+            page.wait_for_timeout(150)
         loc.screenshot(path=os.path.join(OUT, name))
         results[name] = info
         return info
@@ -78,7 +83,19 @@ with sync_playwright() as p:
     page.screenshot(path=os.path.join(OUT, "crowded-nav.png"), clip={"x":0,"y":0,"width":1440,"height":clip_h})
     results["crowded-nav.png"] = nav_info
 
-    # 2) Identical testimonial repeated across all carousel slides
+    # 2) Proof, Not Promises counters as machines see them (initial HTML = 0)
+    element_shot("proof-counters.png", """() => {
+      document.querySelector('#masthead')?.classList.add('__hide');
+      const h2 = [...document.querySelectorAll('h2')].find(h=>/Proof, Not Promises/i.test(h.textContent));
+      const sec = h2.closest('section'); sec.setAttribute('data-shot','proof');
+      sec.querySelectorAll('.elementor-counter-number').forEach(c=>c.setAttribute('data-to-value','0'));
+      const counters = [...sec.querySelectorAll('.elementor-counter')];
+      (counters.length ? counters : [...sec.querySelectorAll('.elementor-counter-number')])
+        .forEach(t=>t.setAttribute('data-hl','1'));
+      return { vals: [...sec.querySelectorAll('.elementor-counter-number')].map(c=>c.textContent.trim()) };
+    }""", freeze0=True)
+
+    # 3) Identical testimonial repeated across all carousel slides
     element_shot("testimonials-duplicate.png", """() => {
       document.querySelector('#masthead')?.classList.add('__hide');
       const h2 = [...document.querySelectorAll('h2')].find(h=>/What Our Customers Say/i.test(h.textContent));
