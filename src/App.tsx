@@ -25,7 +25,7 @@ const TABS: [Tab, string][] = [
   ['ai', 'AI Visibility'],
   ['competitors', 'Competitors'],
   ['revenue', 'Revenue Gaps'],
-  ['homepage', 'Homepage Improvement Recommendations'],
+  ['homepage', 'Homepage Recommendations'],
   ['action', 'Action Plan'],
 ]
 
