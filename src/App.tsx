@@ -16,8 +16,8 @@ import {
   VBars,
 } from './components'
 
-type Tab = 'overview' | 'gap' | 'ai' | 'competitors' | 'revenue' | 'action'
-type Sub = 'seo' | 'keywords' | 'backlinks' | 'conversion'
+type Tab = 'overview' | 'gap' | 'ai' | 'competitors' | 'revenue' | 'homepage' | 'action'
+type Sub = 'seo' | 'keywords' | 'backlinks'
 
 const TABS: [Tab, string][] = [
   ['overview', 'Overview'],
@@ -25,6 +25,7 @@ const TABS: [Tab, string][] = [
   ['ai', 'AI Visibility'],
   ['competitors', 'Competitors'],
   ['revenue', 'Revenue Gaps'],
+  ['homepage', 'Homepage Improvement Recommendations'],
   ['action', 'Action Plan'],
 ]
 
@@ -32,7 +33,6 @@ const SUBS: [Sub, string][] = [
   ['seo', 'SEO'],
   ['keywords', 'Keywords'],
   ['backlinks', 'Backlinks'],
-  ['conversion', 'Conversion'],
 ]
 
 function Grid({ cols, children }: { cols: string; children: React.ReactNode }) {
@@ -411,59 +411,56 @@ export default function App() {
             </div>
           </div>
 
-          {/* --- CONVERSION --- */}
-          <div hidden={sub !== 'conversion'}>
-            <SectionLabel>D · On-site conversion</SectionLabel>
-            <h3 className="font-display mb-2 mt-1 text-2xl font-bold text-white">
-              Homepage funnel — what converts and what leaks
-            </h3>
-            <p className="mb-6 max-w-3xl text-sm leading-relaxed text-slate-400">
-              A heuristic walkthrough of the live {D.company.domain} homepage and its primary
-              demo-request path. No form was submitted and no personal information was entered.
-            </p>
+        </section>
 
-            <Grid cols="sm:grid-cols-2">
-              {D.conversionStrengths.map((s) => (
-                <Panel key={s.title} className="border-l-2 border-l-[#4CCD79]/40">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#4CCD79]">✓</span>
-                    <h4 className="font-display text-base font-semibold text-white">{s.title}</h4>
+        {/* ===================== HOMEPAGE IMPROVEMENT RECOMMENDATIONS ===================== */}
+        <section hidden={tab !== 'homepage'}>
+          <SectionTitle
+            kicker="Section 6"
+            title="Homepage Improvement Recommendations"
+            intro="A heuristic walkthrough of the live cadienttalent.com homepage and its primary demo-request path — identifying what converts and what leaks, with prioritised, evidence-based improvements."
+          />
+
+          <Grid cols="sm:grid-cols-2">
+            {D.conversionStrengths.map((s) => (
+              <Panel key={s.title} className="border-l-2 border-l-[#4CCD79]/40">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#4CCD79]">✓</span>
+                  <h4 className="font-display text-base font-semibold text-white">{s.title}</h4>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.detail}</p>
+              </Panel>
+            ))}
+          </Grid>
+
+          <h4 className="font-display mb-4 mt-9 text-lg font-semibold text-white">
+            Critical issues — Conversion
+          </h4>
+          <div className="grid gap-4">
+            {D.conversionIssues.map((i) => (
+              <IssueCard key={i.title} {...i} />
+            ))}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-[#3AC2FC]/25 bg-[#3AC2FC]/[0.04] p-5 sm:p-7">
+            <SectionLabel>Action focus</SectionLabel>
+            <h3 className="font-display mt-1 text-2xl font-bold text-white">
+              How we can improve the homepage to get better conversions
+            </h3>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-400">
+              Prioritised, evidence-based changes drawn from the live homepage walkthrough —
+              ordered by conversion impact.
+            </p>
+            <div className="mt-6 grid gap-4">
+              {D.homepageImprovements.map((h) => (
+                <Panel key={h.priority} className="flex gap-4">
+                  <span className={`kpi-num text-xl ${toneText(h.tone)}`}>{h.priority}</span>
+                  <div>
+                    <h4 className="font-display text-base font-semibold text-white">{h.title}</h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{h.detail}</p>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.detail}</p>
                 </Panel>
               ))}
-            </Grid>
-
-            <h4 className="font-display mb-4 mt-9 text-lg font-semibold text-white">
-              Critical issues — Conversion
-            </h4>
-            <div className="grid gap-4">
-              {D.conversionIssues.map((i) => (
-                <IssueCard key={i.title} {...i} />
-              ))}
-            </div>
-
-            {/* Homepage improvement playbook */}
-            <div className="mt-12 rounded-2xl border border-[#3AC2FC]/25 bg-[#3AC2FC]/[0.04] p-5 sm:p-7">
-              <SectionLabel>Action focus</SectionLabel>
-              <h3 className="font-display mt-1 text-2xl font-bold text-white">
-                How we can improve the homepage to get better conversions
-              </h3>
-              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-400">
-                Prioritised, evidence-based changes drawn from the live homepage walkthrough —
-                ordered by conversion impact.
-              </p>
-              <div className="mt-6 grid gap-4">
-                {D.homepageImprovements.map((h) => (
-                  <Panel key={h.priority} className="flex gap-4">
-                    <span className={`kpi-num text-xl ${toneText(h.tone)}`}>{h.priority}</span>
-                    <div>
-                      <h4 className="font-display text-base font-semibold text-white">{h.title}</h4>
-                      <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{h.detail}</p>
-                    </div>
-                  </Panel>
-                ))}
-              </div>
             </div>
           </div>
         </section>
