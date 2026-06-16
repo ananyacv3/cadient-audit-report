@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyan: #3ac2fc;
+  --emerald: #4ccd79;
+  --orange: #ff7a1a;
+  --danger: #ef4444;
+  --amber: #f59e0b;
+  --ink: #e6edf6;
+  --muted: #93a4ba;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(160deg, #0a0f1e 0%, #0b1120 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(58, 194, 252, 0.3);
+}
+
+/* Translucent dark-navy panel used for every card */
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 20px 40px -28px rgba(0, 0, 0, 0.7);
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider;
+  }
+  .kpi-num {
+    font-family: 'Space Grotesk', Inter, sans-serif;
+    @apply font-bold leading-none tracking-tight;
+  }
+  .tab-link {
+    @apply relative whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white;
+  }
+  .tab-link-active {
+    @apply bg-white/[0.07] text-white;
+  }
+}
+
+/* Thin custom scrollbar for the tab strip on small screens */
+.no-scrollbar::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
