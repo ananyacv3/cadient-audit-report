@@ -509,9 +509,9 @@ export const conversionIssues: Issue[] = [
   },
   {
     severity: 'DECLINING',
-    title: 'The same testimonial is repeated three times',
+    title: 'The same testimonial is repeated five times',
     detail:
-      'The “What Our Customers Say” block shows one identical quote — “Before SmartSource™, we threw job posts everywhere…” attributed to “Director of TA, National Logistics Group” — duplicated three times, which undercuts credibility.',
+      'The “What Our Customers Say” block shows one identical quote — “Before SmartSource™, we threw job posts everywhere…” attributed to “Director of TA, National Logistics Group” — duplicated five times in a row, which undercuts credibility.',
     fix: 'Replace the duplicates with distinct, attributed testimonials (name, title, company, ideally logo or photo).',
   },
   {
@@ -555,7 +555,7 @@ export const homepageImprovements: {
     priority: 'P3',
     title: 'Replace the duplicate testimonials with distinct proof',
     detail:
-      'Swap the three identical quotes for varied, fully attributed testimonials with measurable outcomes. Pair each with a company name or logo to make the social proof concrete.',
+      'Swap the five identical quotes for varied, fully attributed testimonials with measurable outcomes. Pair each with a company name or logo to make the social proof concrete.',
     tone: 'warn',
   },
   {
@@ -574,20 +574,13 @@ export const homepageImprovements: {
   },
   {
     priority: 'P6',
-    title: 'Add a short product demo video',
+    title: 'Add a short product / platform demo video',
     detail:
-      'The homepage describes nine AI modules in text and bullets but shows no video. A 60–90 second walkthrough embedded near the hero — or a dedicated “See it in action” section — lets self-qualifying B2B buyers understand the platform faster and converts higher-intent visitors who are not yet ready to book a cold demo.',
+      'The nine AI modules are explained in text and bullets only — the platform itself is never shown in motion. The only videos on the page are blog-post features at the very bottom, plus off-page webinar links. A 60–90 second SmartSuite™ walkthrough embedded near the hero or modules lets self-qualifying B2B buyers understand the product faster and converts higher-intent visitors who are not yet ready to book a cold demo.',
     tone: 'neutral',
   },
   {
     priority: 'P7',
-    title: 'Add industry / persona navigation pathways',
-    detail:
-      'Every visitor lands on the same page regardless of whether they are in retail, healthcare, logistics, or enterprise staffing. A short “Who we help” row with quick-links to the relevant case study and modules lets buyers self-identify and reach proof that matches their context — reducing bounce and lifting demo intent.',
-    tone: 'neutral',
-  },
-  {
-    priority: 'P8',
     title: 'Turn the blog section into a conversion zone',
     detail:
       'Ten blog posts at the bottom of the homepage send engaged readers off-site with no path back to conversion. Either replace the section with a single featured insight card plus a demo CTA, or append a “Ready to hire smarter? → Schedule a Demo” rail after the blog links to recapture intent before visitors leave.',
